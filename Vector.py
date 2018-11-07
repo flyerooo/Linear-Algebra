@@ -16,10 +16,20 @@ class Vector:
         return Vector([a - b for a, b in zip(self, other)])
 
     def __mul__(self, k):
+        """返回数量乘法的结果向量：self * k"""
         return Vector([k * e for e in self])
 
     def __rmul__(self, k):
+        """返回数量乘法的结果向量：k * self"""
         return self * k
+
+    def __pos__(self):
+        """返回向量取正的结果向量"""
+        return 1 * self
+
+    def __neg__(self):
+        """返回向量取负的结果向量"""
+        return -1 * self
 
     def __iter__(self):
         """返回向量的迭代器"""
