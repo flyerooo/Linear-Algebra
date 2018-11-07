@@ -1,19 +1,33 @@
 class Vector:
     def __init__(self, lst):
-        self._values = lst
+        self._values = list(lst)  # 相当于复制了一次lst，使得这个类更符合不可更改类型
 
-    def __add__(self, other):
+    def __add__(self, another):
+        """向量加法，返回结果向量"""
+        assert len(self) == len(another), \
+            "Error in adding. Length of vectors must be same."
+        # 因为实现了__iter__，就不这样写了
+        # return Vector([a + b for a, b in zip(self._values, another._values)])
+        return Vector([a + b for a, b in zip(self, another)])
+
+    def __sub__(self, other):
         assert len(self) == len(other), \
             "Error in adding. Length of vectors must be same."
-        return Vector([a + b for a, b in zip(self, other)])
+        return Vector([a - b for a, b in zip(self, other)])
 
-    def __iter__(self, item):
+    def __mul__(self, k):
+        return Vector([k * e for e in self])
+
+    def __iter__(self):
+        """返回向量的迭代器"""
         return self._values.__iter__()
 
     def __getitem__(self, index):
+        """取向量的第index个元素"""
         return self._values[index]
 
     def __len__(self):
+        """返回向量长度（有多少个元素）"""
         return len(self._values)
 
     def __repr__(self):
