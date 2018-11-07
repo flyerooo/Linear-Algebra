@@ -18,6 +18,9 @@ class Vector:
     def __mul__(self, k):
         return Vector([k * e for e in self])
 
+    def __rmul__(self, k):
+        return self * k
+
     def __iter__(self):
         """返回向量的迭代器"""
         return self._values.__iter__()
