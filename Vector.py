@@ -1,6 +1,7 @@
 import math
 from ._global import EPSILON
 
+
 class Vector:
     def __init__(self, lst):
         self._values = list(lst)  # 相当于复制了一次lst，使得这个类更符合不可更改类型
@@ -38,6 +39,12 @@ class Vector:
     def __mul__(self, k):
         """返回数量乘法的结果向量：self * k"""
         return Vector([k * e for e in self])
+
+    def dot(self, another):
+        """向量点乘，返回结果标量"""
+        assert len(self) == len(another), \
+            "Error in adding. Length of vectors must be same."
+        return sum(a * b for a, b in zip(self, another))
 
     def __rmul__(self, k):
         """返回数量乘法的结果向量：k * self"""
